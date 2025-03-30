@@ -1,0 +1,18 @@
+{
+    "zero_shot": {
+        "file_name": "zero_shot.json",
+        "columns": {
+            "prompt": "instruction",
+            "query": "input",
+            "response": "output"
+        }
+    },
+    "few_shot": {
+        "file_name": "few_shot.json",
+        "columns": {
+            "prompt": "instruction",
+            "query": "input",
+            "response": "output"
+        }
+    }
+}
