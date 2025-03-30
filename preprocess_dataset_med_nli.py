@@ -70,7 +70,8 @@ def main():
     dataset = load_dataset("presencesw/all_nli_med_v1")
 
     dataset = concatenate_datasets([dataset["train"], dataset["validation"]])
-
+    for _ in range(20):
+        dataset = dataset.shuffle(seed=42)
     # print(dataset)
     # print(dataset[0])
 
