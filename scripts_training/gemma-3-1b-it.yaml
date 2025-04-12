@@ -6,7 +6,7 @@ trust_remote_code: true
 stage: sft
 do_train: true
 finetuning_type: full
-# deepspeed: examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
+deepspeed: examples/deepspeed/ds_z1_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
 
 ### dataset
 dataset_dir: data_nli
@@ -19,7 +19,7 @@ preprocessing_num_workers: 16
 dataloader_num_workers: 4
 
 ### output
-output_dir: saves/qwen2.5-1.5b/full/sft
+output_dir: saves/gemma-3-1b-it/full/sft
 logging_steps: 50
 save_steps: 1000
 plot_loss: true
