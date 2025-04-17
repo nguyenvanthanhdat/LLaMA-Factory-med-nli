@@ -69,6 +69,7 @@ answer = """
 def main():
     dataset = load_dataset("presencesw/all_nli_med_v1")
 
+    dataset_test = dataset["test"]
     dataset = concatenate_datasets([dataset["train"], dataset["validation"]])
     for _ in range(20):
         dataset = dataset.shuffle(seed=42)
@@ -102,6 +103,7 @@ def main():
         
     dataset_zeroshot = dataset.map(preprocess_function_zero_shot, batched=True)
     dataset_fewshot = dataset.map(preprocess_function_few_shot, batched=True)
+    dataset_test_zeroshot = dataset_test.map(preprocess_function_zero_shot, batched=True)
 
     # print(dataset_zeroshot[0])
 
@@ -130,6 +132,18 @@ def main():
         json.dump(fewshot_list, f, indent=4)
         
     print("Few-shot dataset saved to data_nli/few_shot.json")
+    
+    zeroshot_list_test = []
+    for i in dataset_test_zeroshot:
+        input_dict = dict()
+        input_dict["instruction"] = instruction
+        input_dict["input"] = i["inputs"]
+        input_dict["output"] = i["targets"]
+        zeroshot_list_test.append(input_dict)
+    with open("data_nli/zero_shot_test.json", "w") as f:
+        json.dump(zeroshot_list_test, f, indent=4)
+    print("zero-shot test dataset saved to data_nli/zero_shot_test.json")
+
 
 if __name__ == "__main__":
     main()
